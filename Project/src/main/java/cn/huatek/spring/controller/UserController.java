@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Controller("userController")
 public class UserController {
-
+//wqewqe
 	@Resource(name = "userService")
 	private IUserService userService;
 
