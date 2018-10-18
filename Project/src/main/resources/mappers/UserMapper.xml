@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huatek.spring.mapper.UserMapper">
+	
+  <select id="finAllUser" resultType="cn.huatek.spring.entity.User">
+  		SELECT
+			t_user.username,
+			t_user.id,
+			t_user.pid
+		FROM
+			t_user
+  		
+  </select>
+  
+  <select id="finAllProject" resultType="cn.huatek.spring.entity.Project">
+		SELECT
+			t_project.section,
+			t_project.id
+		FROM
+			t_project
+
+  </select>
+  
+  <select id="finAllTime" resultType="cn.huatek.spring.entity.Time">
+		SELECT
+			t_time.id,
+			t_time.date,
+			t_time.`week`,
+			t_time.`hour`
+		FROM
+			t_time
+
+ </select>
+ 	
+ 	<!-- 查询每个部门中每个人一周的每天工作时间 -->
+   <select id="findPersonHour" resultType="java.util.Map">
+		SELECT
+			u.username,
+			r.id,
+			t.date,
+			t.week,
+			t.hour,
+			p.section
+		FROM
+			t_user u
+			LEFT JOIN t_relation r ON u.id = r.uid
+			LEFT JOIN t_time t ON t.id = r.id
+			right JOIN t_project p ON p.id = u.pid;
+ </select>
+  
+  
+</mapper>
+
+
+
+
+
