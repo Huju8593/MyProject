@@ -4,52 +4,54 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huatek.spring.mapper.UserMapper">
 	
-  <select id="finAllUser" resultType="cn.huatek.spring.entity.User">
-  		SELECT
-			t_user.username,
-			t_user.id,
-			t_user.pid
+  <!--t_weeks和t_dates关联查询  -->
+  <select id="finAllDate" resultType="java.util.Map">
+		SELECT DISTINCT
+			w.week,
+			d.date 
 		FROM
-			t_user
-  		
+			t_weeks w
+			JOIN t_dates d ON w.id = d.wid
   </select>
   
-  <select id="finAllProject" resultType="cn.huatek.spring.entity.Project">
-		SELECT
-			t_project.section,
-			t_project.id
+    <!--查询部门  -->
+  <select id="finAllSection" resultType="cn.huatek.spring.entity.Section">
+		SELECT DISTINCT
+			id,
+			sectionname 
 		FROM
-			t_project
-
+			t_section
+			
   </select>
   
-  <select id="finAllTime" resultType="cn.huatek.spring.entity.Time">
+      <!--根据部门名称查询每个部门中对应的用户  -->
+  <select id="finAllUserBysectionname" resultType="java.util.Map">
 		SELECT
-			t_time.id,
-			t_time.date,
-			t_time.`week`,
-			t_time.`hour`
+			s.sectionname,
+			u.username 
 		FROM
-			t_time
-
- </select>
- 	
- 	<!-- 查询每个部门中每个人一周的每天工作时间 -->
-   <select id="findPersonHour" resultType="java.util.Map">
+			t_section s
+			JOIN t_user u ON s.id = u.pid
+			where s.sectionname=#{sectionname}
+			
+  </select>
+  
+    <!--//根据用户名查询出个人一个月每天的上班时间  -->
+  <select id="finAllHourByUsername" resultType="java.util.Map">
 		SELECT
+			s.sectionname,
 			u.username,
-			r.id,
-			t.date,
-			t.week,
-			t.hour,
-			p.section
+			h.hour,
+			d.date,
+			w.week
 		FROM
-			t_user u
-			LEFT JOIN t_relation r ON u.id = r.uid
-			LEFT JOIN t_time t ON t.id = r.id
-			right JOIN t_project p ON p.id = u.pid;
- </select>
-  
+			t_section s
+			JOIN t_user u ON s.id = u.pid
+			JOIN t_hours h ON u.pid = h.uid
+			join t_dates d on h.did=d.id
+			join t_weeks w on d.wid=w.id
+			where u.username='张三'
+  </select>
   
 </mapper>
 

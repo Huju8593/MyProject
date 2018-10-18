@@ -1,5 +1,9 @@
 package cn.huatek.spring.entity;
-
+/**
+ * ÓÃ»§
+ * @author Huju
+ *
+ */
 public class User {
 	
 	private Integer id;

@@ -3,36 +3,41 @@ package cn.huatek.spring.service;
 import java.util.List;
 import java.util.Map;
 
-import cn.huatek.spring.entity.Project;
-import cn.huatek.spring.entity.Time;
-import cn.huatek.spring.entity.User;
+import cn.huatek.spring.entity.Section;
 
 public interface IUserService {
 
-	/**
-	 * 查询所有用户信息
-	 * 
-	 * @return 
-	 */
-	List<User> finAllUser();
+	
 	
 	/**
-	 * 查询所有部门
+	   * 查询出星期和日期对应关系
 	 * @return
 	 */
-	List<Project> finAllProject();
+	List<Map<String,Object>> finAllDate(); 	
 	
 	/**
-	 * 查询所有工作日期
+	 * 查询所有的部门
 	 * @return
 	 */
-	
-	List<Time> finAllTime();
+	List<Section> finAllSection(); 
 	
 	/**
-	 * 查询每个部门中每个人一周的每天工作时间 
+	 * 根据部门名称查询每个部门中对应的用户 
 	 * @return
 	 */
-	List<Map<String,Object>> findPersonHour(); 
+	List<Map<String,Object>> finAllUserBysectionname(String sectionname); 
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	   * 根据用户名查询出个人一个月每天的上班时间
+	 * @return
+	 */
+	List<Map<String, Object>> finAllHourByUsername(); 
 
 }

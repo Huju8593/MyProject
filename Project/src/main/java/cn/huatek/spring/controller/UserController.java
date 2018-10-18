@@ -1,17 +1,18 @@
 package cn.huatek.spring.controller;
 
-import cn.huatek.spring.entity.Project;
-import cn.huatek.spring.entity.Time;
-import cn.huatek.spring.entity.User;
-import cn.huatek.spring.service.IUserService;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
+import cn.huatek.spring.entity.Section;
+import cn.huatek.spring.entity.User;
+import cn.huatek.spring.service.IUserService;
 
 @Controller("userController")
 public class UserController {
@@ -25,16 +26,18 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/list_user.do")
-	public String showListUser(ModelMap modelMap) {
-		List<User> users = userService.finAllUser();
-		List<Project> projects = userService.finAllProject();
-		List<Time> times = userService.finAllTime();
-		List<Map<String, Object>> maps = userService.findPersonHour();
+	public String showListUser(ModelMap modelMap,String sectionname) {
+		System.out.println(sectionname);
+		List<Map<String, Object>> users = userService.finAllHourByUsername();
+		List<Map<String, Object>> dates = userService.finAllDate();
+		List<Section> sections = userService.finAllSection();
+		List<Map<String, Object>> maps1 = userService.finAllUserBysectionname(sectionname);
 		modelMap.addAttribute("users", users);
-		modelMap.addAttribute("projects", projects);
-		modelMap.addAttribute("times", times);
-		modelMap.addAttribute("maps", maps);
-		return "../list2";
+		modelMap.addAttribute("dates", dates);
+		modelMap.addAttribute("sections", sections);
+		modelMap.addAttribute("maps1", maps1);
+		System.out.println(maps1);
+		return "../list3";
 	}
 
 }

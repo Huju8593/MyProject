@@ -7,30 +7,50 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.huatek.spring.entity.Project;
-import cn.huatek.spring.entity.Time;
-import cn.huatek.spring.entity.User;
+import cn.huatek.spring.entity.Section;
 import cn.huatek.spring.mapper.UserMapper;
 
 @Service("userService")
-public class UserServiceImpl implements IUserService {
+public  class UserServiceImpl implements IUserService {
 
 	@Resource(name = "userMapper")
 	private UserMapper userMapper;
 
-	public List<User> finAllUser() {
-		return userMapper.finAllUser();
+
+	public List<Map<String, Object>> finAllDate() {
+		return userMapper.finAllDate();
+	}
+	
+	public List<Section> finAllSection() {
+		return userMapper.finAllSection();
+	}
+	
+	public List<Map<String,Object>> finAllUserBysectionname(String sectionname) {
+		return userMapper.finAllUserBysectionname(sectionname);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Map<String, Object>> finAllHourByUsername() {
+		return userMapper.finAllHourByUsername();
 	}
 
-	public List<Project> finAllProject() {
-		return userMapper.finAllProject();
+	public List<Section> finAllSection(Section section) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public List<Time> finAllTime() {
-		return userMapper.finAllTime();
-	}
 
-	public List<Map<String, Object>> findPersonHour() {
-		return userMapper.findPersonHour();
-	}
+
+
 }

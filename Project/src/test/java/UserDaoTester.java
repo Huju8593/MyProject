@@ -5,16 +5,13 @@ import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import cn.huatek.spring.entity.Project;
-import cn.huatek.spring.entity.Time;
-import cn.huatek.spring.entity.User;
 import cn.huatek.spring.mapper.UserMapper;
 
 
 public class UserDaoTester {
 
 
-	@Test
+/*	@Test
 	public void testFindAllUser() {
 		AbstractApplicationContext ac
 						=new ClassPathXmlApplicationContext(
@@ -25,44 +22,18 @@ public class UserDaoTester {
 			System.out.println(user);
 		}
 		ac.close();
-	}
-
-/*	@Test
-	public void testFinAllProject() {
-		AbstractApplicationContext ac
-						=new ClassPathXmlApplicationContext(
-								"spring-dao.xml");
-		UserMapper userMapper = ac.getBean("userMapper", UserMapper.class);
-		List<Project> projects = userMapper.finAllProject();
-		for (Project project : projects) {
-			System.out.println(project);
-		}
-		ac.close();
-	}
+	}*/
 
 	@Test
-	public void testFinAllTime() {
+	public void testFinAllDate() {
 		AbstractApplicationContext ac
 						=new ClassPathXmlApplicationContext(
 								"spring-dao.xml");
 		UserMapper userMapper = ac.getBean("userMapper", UserMapper.class);
-		List<Time> times = userMapper.finAllTime();
-		for (Time time : times) {
-			System.out.println(time);
-		}
-		ac.close();
-	}
-	
-	@Test
-	public void testFindAllTime() {
-		AbstractApplicationContext ac
-						=new ClassPathXmlApplicationContext(
-								"spring-dao.xml");
-		UserMapper userMapper = ac.getBean("userMapper", UserMapper.class);
-		List<Map<String, Object>> maps = userMapper.findPersonHour();
-		for(Map map : maps) {
+		List<Map<String, Object>> dates = userMapper.finAllUserBysectionname("ÑÐ·¢²¿");
+		for(Map<String, Object> map : dates) {
 			System.out.println(map);
 		}
 		ac.close();
-	}*/
+	}
 }
