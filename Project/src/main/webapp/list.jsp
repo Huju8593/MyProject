@@ -10,107 +10,88 @@ table {
 	border-collapse: collapse;
 }
 </style>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
 
 	<table width="100%" cellpadding="8px" border="1PX" cellspacing="0"
 		border="1">
 		<h1>打卡器</h1>
-		<a>导出表格</a>
-		
+		<a style="text-decoration: none">导出表格</a>
+		<br>
+		<br>
 		<tr>
 			<th>导出时间</th>
-			<th>人数(:人)</th>
-			<th colspan="7">小伙伴公司</th>
-			<th>总工作时间(:T)</th>
+			<th>人数:${size}</th>
+			<th colspan="31">小伙伴公司(十月份)</th>
+			<th>总工作时间:(h)</th>
 		</tr>
 		<tr align="center">
 			<td rowspan="2">部门</td>
 			<td rowspan="2">姓名</td>
-			<td>${times[0].date}</td>
-			<td>${times[1].date}</td>
-			<td>${times[2].date}</td>
-			<td>${times[3].date}</td>
-			<td>${times[4].date}</td>
-			<td>${times[5].date}</td>
-			<td>${times[6].date}</td>
-			<td>-----</td>
-		</tr>
-		<tr align="center">
-			<td>${times[0].week}</td>
-			<td>${times[1].week}</td>
-			<td>${times[2].week}</td>
-			<td>${times[3].week}</td>
-			<td>${times[4].week}</td>
-			<td>${times[5].week}</td>
-			<td>${times[6].week}</td>
-			<td>-----</td>
+			<c:forEach items="${dates}" var="date">
+				<td align="center">${date.date}</td>
+			</c:forEach>
+			<td></td>
 		</tr>
 
-		<tr align="center">
-			<td rowspan="3">${projects[0].section}</td>
-			<td>${users[0].username}</td>
-			<td>${maps[0].hour}</td>
-			<td>${maps[1].hour}</td>
-			<td>${maps[2].hour}</td>
-			<td>${maps[3].hour}</td>
-			<td>${maps[4].hour}</td>
-			<td>${maps[5].hour}</td>
-			<td>${maps[6].hour}</td>
-			<td>-----</td>
+		<tr>
+			<c:forEach items="${dates}" var="date">
+				<td align="center">${date.week}</td>
+			</c:forEach>
+			<td></td>
 		</tr>
 
+		<c:forEach items="${sections}" var="section">
+			<c:forEach items="${section.list}" var="list">
+				<tr align="center">
+					<td onclick="showUser()">${list.sectionname}</td>
+					<td>${list.username}</td>
+					<c:forEach items="${list.hours}" var="li">
+						<td>${li.hour}</td>
+						<td name="td" style="display: none">${li.id}</td>
+					</c:forEach>
+					<th>${list.sums}</th>
+				</tr>
+			</c:forEach>
+		</c:forEach>
 		<tr align="center">
-			<td>${users[1].username}</td>
-			<td>111</td>
-			<td>111</td>
-			<td>111</td>
-			<td>111</td>
-			<td>111</td>
-			<td>111</td>
-			<td>111</td>
-			<td>-----</td>
-		</tr>
-		<tr align="center">
-			<td>${users[2].username}</td>
-			<td>222</td>
-			<td>222</td>
-			<td>222</td>
-			<td>222</td>
-			<td>222</td>
-			<td>222</td>
-			<td>222</td>
-			<td>-----</td>
-		</tr>
-		<tr align="center">
-			<td rowspan="2">${projects[1].section}</td>
-			<td>${users[3].username}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>-----</td>
-		</tr>
-		<tr align="center">
-			<td>${users[4].username}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>-----</td>
-		</tr>
-		<tr align="center">
-			<td colspan="9"></td>
-			<td>------</td>
+			<th colspan="33"></th>
+			<th>总计:${sum}</th>
 		</tr>
 	</table>
 
+	<!-- <script type="text/javascript">
+		$(function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/list_user.do",
+				type : "post",
+				data : {"sectionname":$("#td").text()},
+				//服务器返回的类型
+				datatype : "json",
+				success : function(obj) {
+					alert(obj);
+				}
+			});
+		});
+	</script> -->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var td = document.getElementsByTagName('td');
+
+			for (var i = 0, len = td.length; i < len; i++) {
+				td[i].onclick = function() {
+					alert(555);
+				}
+			}
+
+		});
+		/* 		function showState() {
+		 alert($("td").text());
+		 window.open('./open.do?id=' + $("td").text(), '_self');
+		 } */
+	</script>
 
 	<script type="text/javascript">
 		// 使用outerHTML属性获取整个table元素的HTML代码（包括<table>标签），然后包装成一个完整的HTML文档，设置charset为urf-8以防止中文乱码
@@ -127,5 +108,5 @@ table {
 		// 设置文件名
 		a.download = "打卡器.xls";
 	</script>
-</body>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 </html>
