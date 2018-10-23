@@ -16,7 +16,6 @@ table {
 
 	<table width="100%" cellpadding="8px" border="1PX" cellspacing="0"
 		border="1">
-		<h1>打卡器</h1>
 		<a style="text-decoration: none">导出表格</a>
 		<br>
 		<br>
@@ -49,9 +48,8 @@ table {
 					<td>${list.username}</td>
 					<c:forEach items="${list.hours}" var="li">
 						<td class="b">
-							<label>${li.hour}</label>
-							<input style="display: none" type="text" name="SocSecNum" class="a"
-							id="SSN" value="${li.id}"/>
+						<span>${li.hour}</span> 
+						<input style="display: none" type="text"  class="a"value="${li.id}" />
 						</td>
 					</c:forEach>
 					<th>${list.sums}</th>
@@ -59,25 +57,15 @@ table {
 			</c:forEach>
 		</c:forEach>
 		<tr align="center">
-			<th colspan="33"></th>
-			<th>总计:${sum}</th>
+			<th colspan="33">总计:</th>
+			<th>${sum}</th>
 		</tr>
 	</table>
 
 	<script type="text/javascript">
-		/*  		$(document).ready(function() {
-		 var td = document.getElementsByTagName('td');
-		 for (var i = 0, len = td.length; i < len; i++) {
-		 td[i].onclick = function() {
-		 window.open('./open.do?id=' + $("td").text(), '_self');
-		 }
-		 }
-
-		 });  */
-		    $( ".b" ).click(function () {
-		          alert($(".a").val());
-		          window.open('./open.do?id=' +$(".a").val(), '_self');
-		      });
+		$(".b").click(function() {
+			window.open('open.do?id=' + $(this).children(".a").val(),"", '_self');
+		});
 	</script>
 
 	<script type="text/javascript">

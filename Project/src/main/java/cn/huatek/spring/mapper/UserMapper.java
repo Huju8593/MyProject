@@ -49,5 +49,7 @@ public interface UserMapper {
 	 */
 	Integer finAllHourSum();
 	
+	Integer changeHour();
+	
 	Hours openShow(Integer id);
 }

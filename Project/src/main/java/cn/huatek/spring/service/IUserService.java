@@ -51,5 +51,7 @@ public interface IUserService {
 	 */
 	Integer finAllHourSum();
 	
+	Integer changeHour();
+	
 	Hours openShow(Integer id);
 }

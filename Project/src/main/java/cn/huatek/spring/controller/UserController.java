@@ -1,6 +1,5 @@
 package cn.huatek.spring.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,11 @@ public class UserController {
 
 	@RequestMapping(value = "/list_user.do")
 	public String showList(ModelMap modelMap) {
+/*		int ms = userService.changeHour().intValue();
+		int hour=ms/3600;
+		String s = String.valueOf(hour);
+		Hours h=new Hours();
+		h.setHour(s);*/
 		List<User> userlist = userService.finAll();
 		int size = userlist.size();
 		List<Map<String, Object>> dates = userService.finAllDate();
@@ -47,6 +51,7 @@ public class UserController {
 // Section [id=2, sectionname=设计部, list=[{sectionname=设计部, username=李四}]]
 		}
 		int sum = userService.finAllHourSum().intValue();
+
 		modelMap.addAttribute("size", size);
 		modelMap.addAttribute("dates", dates);
 		modelMap.addAttribute("sections", sections);

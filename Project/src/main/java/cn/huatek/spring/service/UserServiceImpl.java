@@ -48,9 +48,15 @@ public  class UserServiceImpl implements IUserService {
 		return userMapper.finAllHourSum();
 	}
 	
+	public Integer changeHour() {
+		return userMapper.changeHour();
+	}
+	
 	public Hours openShow(Integer id) {
 		return userMapper.openShow(id);
 	}
+
+	
 
 
 
