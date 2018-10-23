@@ -45,11 +45,14 @@ table {
 		<c:forEach items="${sections}" var="section">
 			<c:forEach items="${section.list}" var="list">
 				<tr align="center">
-					<td onclick="showUser()">${list.sectionname}</td>
+					<td>${list.sectionname}</td>
 					<td>${list.username}</td>
 					<c:forEach items="${list.hours}" var="li">
-						<td>${li.hour}</td>
-						<td name="td" style="display: none">${li.id}</td>
+						<td class="b">
+							<label>${li.hour}</label>
+							<input style="display: none" type="text" name="SocSecNum" class="a"
+							id="SSN" value="${li.id}"/>
+						</td>
 					</c:forEach>
 					<th>${list.sums}</th>
 				</tr>
@@ -61,36 +64,20 @@ table {
 		</tr>
 	</table>
 
-	<!-- <script type="text/javascript">
-		$(function() {
-			$.ajax({
-				url : "${pageContext.request.contextPath}/list_user.do",
-				type : "post",
-				data : {"sectionname":$("#td").text()},
-				//服务器返回的类型
-				datatype : "json",
-				success : function(obj) {
-					alert(obj);
-				}
-			});
-		});
-	</script> -->
-
 	<script type="text/javascript">
-		$(document).ready(function() {
-			var td = document.getElementsByTagName('td');
-
-			for (var i = 0, len = td.length; i < len; i++) {
-				td[i].onclick = function() {
-					alert(555);
-				}
-			}
-
-		});
-		/* 		function showState() {
-		 alert($("td").text());
+		/*  		$(document).ready(function() {
+		 var td = document.getElementsByTagName('td');
+		 for (var i = 0, len = td.length; i < len; i++) {
+		 td[i].onclick = function() {
 		 window.open('./open.do?id=' + $("td").text(), '_self');
-		 } */
+		 }
+		 }
+
+		 });  */
+		    $( ".b" ).click(function () {
+		          alert($(".a").val());
+		          window.open('./open.do?id=' +$(".a").val(), '_self');
+		      });
 	</script>
 
 	<script type="text/javascript">

@@ -98,6 +98,10 @@
 			
   </select>
   
+  <update id="changeHour">
+  	UPDATE t_hours SET hour = TIME_TO_SEC(endTime) - TIME_TO_SEC(startTime)
+  </update>
+  
 </mapper>
 
 
