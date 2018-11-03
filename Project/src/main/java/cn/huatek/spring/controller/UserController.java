@@ -15,7 +15,7 @@ import cn.huatek.spring.service.IUserService;
 
 @Controller("userController")
 public class UserController {
-	
+	//1111111111
 	@Resource(name = "userService")
 	private IUserService userService;
 
