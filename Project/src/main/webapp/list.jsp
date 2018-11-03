@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>用户列表</title>
+<title>打卡器</title>
 <style>
 table {
 	border-collapse: collapse;
@@ -19,8 +19,13 @@ table {
 		<a style="text-decoration: none">导出表格</a>
 		<br>
 		<br>
+	<select id="dateinfo" name="dateinfo">
+			<option>===请选择当前月份之前的月份===</option>
+	</select>
+	<br>
+	<br>
 		<tr>
-			<th>导出时间</th>
+			<th>/</th>
 			<th>人数:${size}</th>
 			<th colspan="31">小伙伴公司(十月份)</th>
 			<th>总工作时间:(h)</th>
@@ -28,15 +33,15 @@ table {
 		<tr align="center">
 			<td rowspan="2">部门</td>
 			<td rowspan="2">姓名</td>
-			<c:forEach items="${dates}" var="date">
-				<td align="center">${date.date}</td>
+			<c:forEach items="" var="li">
+				<td align="center"></td>
 			</c:forEach>
 			<td></td>
 		</tr>
 
 		<tr>
-			<c:forEach items="${dates}" var="date">
-				<td align="center">${date.week}</td>
+			<c:forEach items="" var="section">
+				<td align="center"></td>
 			</c:forEach>
 			<td></td>
 		</tr>
@@ -45,26 +50,30 @@ table {
 			<c:forEach items="${section.list}" var="list">
 				<tr align="center">
 					<td>${list.sectionname}</td>
-					<td>${list.username}</td>
-					<c:forEach items="${list.hours}" var="li">
+					<td>${list.empname}</td>
+					<c:forEach items="${list.list}" var="li">
 						<td class="b">
-						<span>${li.hour}</span> 
-						<input style="display: none" type="text"  class="a"value="${li.id}" />
+						<span vr="${li.id}">${li.day}</span> 
 						</td>
 					</c:forEach>
-					<th>${list.sums}</th>
+					<th>${list.sums eq '0' ? '':list.sums}</th>
 				</tr>
 			</c:forEach>
 		</c:forEach>
 		<tr align="center">
-			<th colspan="33">总计:</th>
-			<th>${sum}</th>
+			<th colspan="33">总计:(h)</th>
+			<th></th>
 		</tr>
 	</table>
 
 	<script type="text/javascript">
 		$(".b").click(function() {
-			window.open('open.do?id=' + $(this).children(".a").val(),"", '_self');
+			window.open('show.do?id=' + $(this).children("span").attr('vr'),"", '_self');
+		});
+		
+		/* 选择下拉框传的对应值 */
+		$("#dateinfo").change(function(){
+			var option=$(this).val();
 		});
 	</script>
 
@@ -84,4 +93,5 @@ table {
 		a.download = "打卡器.xls";
 	</script>
 	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="1.js"></script>
 </html>

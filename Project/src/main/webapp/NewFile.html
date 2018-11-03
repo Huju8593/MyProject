@@ -3,102 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
-	<h2>打卡器</h2>
-	<table width="100%" cellpadding="8px" border="1PX" cellspacing="0">
-		<tr>
-			<th>导出时间</th>
-			<th>人数</th>
-			<th colspan="7">小伙伴公司</th>
-			<th>总工作时间</th>
-		</tr>
-		<tr align="center">
-			<td rowspan="2">部门</td>
-			<td rowspan="2">姓名</td>
-			<td>20</td>
-			<td>21</td>
-			<td>22</td>
-			<td>23</td>
-			<td>24</td>
-			<td>25</td>
-			<td>26</td>
-			<td></td>
-		</tr>
-		<tr align="center">
-			<td>星期日</td>
-			<td>星期一</td>
-			<td>星期二</td>
-			<td>星期三</td>
-			<td>星期四</td>
-			<td>星期五</td>
-			<td>星期六</td>
-			<td>=====</td>
-		</tr>
 
-		<tr align="center">
-			<td rowspan="3">开发部</td>
-			<td>张三</td>
-			<td>${user.username}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-		</tr>
+<div id="timo" style="background-color:red;height:50px;width:50px;"></div>
+<a href="javascript:void(0);" id="lol">点击这里</a>
+</body>
 
-		<tr align="center">
-			<td>李四</td>
-			<td>${user.username}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-		</tr>
-		<tr align="center">
-			<td>王五</td>
-			<td>${user.username}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-		</tr>
-		<tr align="center">
-			<td rowspan="2">设计部</td>
-			<td>张三</td>
-			<td>${user.username}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-		</tr>
-		<tr align="center">
-			<td>李四</td>
-			<td>${user.username}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-			<td>${user.hour}</td>
-		</tr>
-		<tr align="center">
-			<td colspan="9"></td>
-			<td>${user.hour}</td>
-		</tr>
-	</table>
-</body>
-</body>
+<script>
+$(function(){
+    $('#lol').click(function(){//点击a标签
+		if($('#timo').is(':hidden')){//如果当前隐藏
+		$('#timo').show();//那么就显示div
+		}else{//否则
+		$('#timo').hide();//就隐藏div
+		}
+    })
+})
+</script>
 </html>

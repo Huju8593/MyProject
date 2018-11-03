@@ -4,24 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huatek.spring.mapper.UserMapper">
 	
-  <!--t_weeks和t_dates关联查询  -->
-  <select id="finAllDate" resultType="java.util.Map">
-		SELECT DISTINCT
-			w.week,
-			d.date 
-		FROM
-			t_weeks w
-			JOIN t_dates d ON w.id = d.wid
-  </select>
   
-    <select id="finAll" resultType="cn.huatek.spring.entity.User">
-		SELECT DISTINCT
-			id,sid,username
-		FROM
-			t_user
-  </select>
-  
-    <!--查询部门  -->
+  <!--查询所有部门1  -->
   <select id="finAllSection" resultType="cn.huatek.spring.entity.Section">
 		SELECT DISTINCT
 			id,
@@ -31,76 +15,36 @@
 			
   </select>
   
-      <!--根据部门名称查询每个部门中对应的用户  -->
+  <!--根据部门名称查询每个部门中的用户2  -->
   <select id="finAllUserBysectionname" resultType="java.util.Map">
 		SELECT
 			s.sectionname,
-			u.username 
+			c.empname 
 		FROM
 			t_section s
-			JOIN t_user u ON s.id = u.sid
+			JOIN card_records c ON s.id = c.sid
 			where s.sectionname=#{sectionname}
+			GROUP BY empname
 			
   </select>
   
-    <!--根据用户名查询出个人一个月每天的上班时间  -->
-  <select id="finAllHourByUsername" resultType="java.util.Map">
+  <select id="finAll" resultType="java.util.Map">
 		SELECT
-			s.sectionname,
-			u.username,
-			h.hour,
-			h.id,
-			d.date,
-			w.week
+			DAYNAME( entrytime ) week,
+			MAX( DATE_FORMAT( entrytime, '%H:%i:%s' ) ) MaxTime,
+			MIN( DATE_FORMAT( entrytime, '%H:%i:%s' ) ) MinTime,
+			empname,
+			DATE_FORMAT( entrytime, '%Y-%m' ) date,
+			DATE_FORMAT( entrytime, '%d' ) day 
 		FROM
-			t_section s
-			left JOIN t_user u ON s.id = u.sid
-			left JOIN t_hours h ON u.id = h.uid
-			left join t_dates d on h.did=d.id
-			left join t_weeks w on d.wid=w.id
-			where u.username=#{username}
+			card_records 
+		WHERE
+			empname =#{empname} 
+		GROUP BY
+		    day
 			
   </select>
   
-  <!--根据用户名查询出个人一个月每天的上班时间总和  -->
-  <select id="finAllHourByUsernameSum" resultType="java.lang.Integer">
-		SELECT
-			sum(h.hour) AS sums
-		FROM
-			t_section s
-			left JOIN t_user u ON s.id = u.sid
-			left JOIN t_hours h ON u.id = h.uid
-			left join t_dates d on h.did=d.id
-			left join t_weeks w on d.wid=w.id
-			where u.username=#{username}
-			
-  </select>
-  
-    <!--根据用户名查询出个人一个月每天的上班时间总和  -->
-  <select id="finAllHourSum" resultType="java.lang.Integer">
-		SELECT
-			sum(h.hour) AS sums
-		FROM
-			t_section s
-			left JOIN t_user u ON s.id = u.sid
-			left JOIN t_hours h ON u.id = h.uid
-			left join t_dates d on h.did=d.id
-			left join t_weeks w on d.wid=w.id
-  </select>
-  
-    <!-- 查看每个人每天工作的起始和终止时间 -->
-    <select id="openShow" resultType="cn.huatek.spring.entity.Hours">
-		SELECT DISTINCT
-			*
-		FROM
-			t_hours
-		where id=#{id}
-			
-  </select>
-  
-  <update id="changeHour">
-  	UPDATE t_hours SET hour = TIME_TO_SEC(endTime) - TIME_TO_SEC(startTime)
-  </update>
   
 </mapper>
 

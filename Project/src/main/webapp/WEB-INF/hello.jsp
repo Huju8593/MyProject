@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>用户注册</title>
+<title>打卡器</title>
 </head>
 <body>
 	<h1>
-		<a href="list_user.do"
+		<a href="list.do"
 			style="display: block; height: 300px; text-align: center; width: 1320px; color: red;">欢迎进入</a>
 	</h1>
 </body>

@@ -33,6 +33,11 @@ public class UserDaoTester {
 		List<Map<String, Object>> dates = userMapper.finAllUserBysectionname("ÑÐ·¢²¿");
 		for(Map<String, Object> map : dates) {
 			System.out.println(map);
+			for(String key :map.keySet()) {
+				System.out.println(key);
+				String username = (String) map.get("username");
+				System.out.println(username);
+			}
 		}
 		ac.close();
 	}
